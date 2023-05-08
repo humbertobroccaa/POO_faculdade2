@@ -1,0 +1,77 @@
+class Empresa {
+  veiculos: Veiculo[];
+  funcionarios: Funcionario[];
+  ordensCombustivel: OrdemCombustivel[];
+
+  constructor() {
+    this.veiculos = [];
+    this.funcionarios = [];
+    this.ordensCombustivel = [];
+  }
+
+  adicionarVeiculo(veiculo: Veiculo): void {
+    this.veiculos.push(veiculo);
+  }
+
+  adicionarFuncionario(funcionario: Funcionario): void {
+    this.funcionarios.push(funcionario);
+  }
+
+  emitirOrdemCombustivel(veiculo: Veiculo, funcionario: Funcionario, quantidadeLitros: number): OrdemCombustivel {
+    const ordemCombustivel = new OrdemCombustivel(veiculo, funcionario, quantidadeLitros);
+    this.ordensCombustivel.push(ordemCombustivel);
+    return ordemCombustivel;
+  }
+}
+
+class Veiculo {
+  modelo: string;
+  placa: string;
+  combustivel: number;
+
+  constructor(modelo: string, placa: string) {
+    this.modelo = modelo;
+    this.placa = placa;
+    this.combustivel = 0;
+  }
+
+  abastecer(quantidadeLitros: number): void {
+    this.combustivel += quantidadeLitros;
+  }
+}
+
+class Funcionario {
+  nome: string;
+  matricula: number;
+
+  constructor(nome: string, matricula: number) {
+    this.nome = nome;
+    this.matricula = matricula;
+  }
+}
+
+class OrdemCombustivel {
+  veiculo: Veiculo;
+  funcionario: Funcionario;
+  quantidadeLitros: number;
+
+  constructor(veiculo: Veiculo, funcionario: Funcionario, quantidadeLitros: number) {
+    this.veiculo = veiculo;
+    this.funcionario = funcionario;
+    this.quantidadeLitros = quantidadeLitros;
+  }
+
+  abastecerVeiculo(): void {
+    this.veiculo.abastecer(this.quantidadeLitros);
+  }
+}
+
+const empresa = new Empresa();
+const veiculo = new Veiculo('Fusca', 'ABC-1234');
+const funcionario = new Funcionario('João', 12345);
+
+
+const ordemCombustivel = empresa.emitirOrdemCombustivel(veiculo, funcionario,20);
+ordemCombustivel.abastecerVeiculo();
+console.log(veiculo);
+console.log(funcionario);
