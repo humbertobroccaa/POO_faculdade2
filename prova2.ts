@@ -17,7 +17,7 @@ class Veiculo {
     }
 
     protected notificarInfracao(): void {
-    //    console.log('Você foi multado por excesso de velocidade!');
+    
     }
 }
 
